@@ -22,6 +22,7 @@ class LeroymerlinSpider(scrapy.Spider):
 
     def parse_item(self, response: HtmlResponse):
         loader = ItemLoader(item=LeroyparserItem(), response=response)
+        loader.add_value("domains", self.allowed_domains)
         loader.add_value("link", response.url)
         loader.add_xpath(
             "photos", "//img[contains(@class, 'pdp-img')]/@src")
